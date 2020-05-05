@@ -94,7 +94,6 @@ var height = argument1;
 var rooms = argument2;
 
 var dungeon = dungeon_setup(width, height);
-var list = dungeon_rooms_init(dungeon, rooms);
 
 for (var i = 1; i < width + 1; i++) {
     for (var j = 1; j < height + 1; j++) {
@@ -104,45 +103,49 @@ for (var i = 1; i < width + 1; i++) {
     }
 }
 
-for (var i = 0; i < ds_list_size(list); i++) {
+if (rooms != -1) {
+    var list = dungeon_rooms_init(dungeon, rooms);
 
-    var doors = ds_list_create();
-    
-    var rm = list[| i];
-    var xx = rm[0];
-    var yy = rm[1];
-    var ww = rm[2];
-    var hh = rm[3];
-    
-    for (var _x = 0; _x < ww; _x++) {
-    
-        var c1 = dungeon[# xx + _x, yy + hh];
-        if (is_array(c1)) {
-            ds_list_add(doors, array(xx + _x, yy + hh, 1));
+    for (var i = 0; i < ds_list_size(list); i++) {
+
+        var doors = ds_list_create();
+        
+        var rm = list[| i];
+        var xx = rm[0];
+        var yy = rm[1];
+        var ww = rm[2];
+        var hh = rm[3];
+        
+        for (var _x = 0; _x < ww; _x++) {
+        
+            var c1 = dungeon[# xx + _x, yy + hh];
+            if (is_array(c1)) {
+                ds_list_add(doors, array(xx + _x, yy + hh, 1));
+            }
+            
+            var c2 = dungeon[# xx + _x, yy - 1];
+            if (is_array(c2)) {
+                ds_list_add(doors, array(xx + _x, yy - 1, 3));
+            }
+            
+        }
+            
+        for (var _y = 0; _y < hh; _y++) {
+        
+            var c1 = dungeon[# xx - 1, yy + _y];
+            if (is_array(c1)) {
+                ds_list_add(doors, array(xx - 1, yy + _y, 0));
+            }
+            
+            var c2 = dungeon[# xx + ww, yy + _y];
+            if (is_array(c2)) {
+                ds_list_add(doors, array(xx + ww, yy + _y, 2));
+            }
+            
         }
         
-        var c2 = dungeon[# xx + _x, yy - 1];
-        if (is_array(c2)) {
-            ds_list_add(doors, array(xx + _x, yy - 1, 3));
-        }
-        
+        dungeon_doors_create(dungeon, doors);
     }
-        
-    for (var _y = 0; _y < hh; _y++) {
-    
-        var c1 = dungeon[# xx - 1, yy + _y];
-        if (is_array(c1)) {
-            ds_list_add(doors, array(xx - 1, yy + _y, 0));
-        }
-        
-        var c2 = dungeon[# xx + ww, yy + _y];
-        if (is_array(c2)) {
-            ds_list_add(doors, array(xx + ww, yy + _y, 2));
-        }
-        
-    }
-    
-    dungeon_doors_create(dungeon, doors);
 }
 
 var region = 0;

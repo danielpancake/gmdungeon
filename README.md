@@ -8,7 +8,7 @@ dungeon_width = 4;
 dungeon_height = 6;
 
 // This is ds_grid that contains generated dungeon
-dungeon = dungeon_create(dungeon_width, dungeon_height, 0);
+dungeon = dungeon_create(dungeon_width, dungeon_height, -1);
 ```
 
 Draw event:
