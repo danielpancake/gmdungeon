@@ -17,6 +17,8 @@ Draw event:
 dungeon_draw(dungeon, 0, 0, dungeon_width, dungeon_height);
 ```
 
+![Dungeon example](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example.png)
+
 ## Requirements
 - GameMaker Studio 1.x
 
