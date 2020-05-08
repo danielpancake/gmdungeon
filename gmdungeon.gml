@@ -95,14 +95,6 @@ var rooms = argument2;
 
 var dungeon = dungeon_setup(width, height);
 
-for (var i = 1; i < width + 1; i++) {
-    for (var j = 1; j < height + 1; j++) {
-        if (dungeon[# i, j] == VOID) {
-            dungeon_generate_maze(dungeon, i, j);
-        }
-    }
-}
-
 if (rooms != -1) {
     var list = dungeon_rooms_init(dungeon, rooms);
 
@@ -148,6 +140,14 @@ if (rooms != -1) {
     }
 }
 
+for (var i = 1; i < width + 1; i++) {
+    for (var j = 1; j < height + 1; j++) {
+        if (dungeon[# i, j] == VOID) {
+            dungeon_generate_maze(dungeon, i, j);
+        }
+    }
+}
+
 var region = 0;
 
 for (var i = 1; i < width + 1; i++) {
@@ -155,12 +155,12 @@ for (var i = 1; i < width + 1; i++) {
         var cell = dungeon[# i, j];
         
         if (cell[5] == -1) {
-            dungeon_floodfill(dungeon, i, j, ++region);
+            dungeon_floodfill(dungeon, i, j, region++);
         }
     }
 }
 
-for (var n = 1; n < region; n++) {
+for (var n = 0; n < region; n++) {
     var doors = ds_list_create();
     
     for (var i = 1; i < width + 1; i++) {
