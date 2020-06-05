@@ -2,7 +2,7 @@
 Dungeon template creating library for GameMaker Studio 1.x
 
 ## Usage
-# Basic dungeon
+### Basic dungeon
 Create event:
 ```gml
 dungeon_width = 4;
@@ -20,17 +20,17 @@ dungeon_draw(dungeon, 0, 0, dungeon_width, dungeon_height);
 
 ![Dungeon example](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example.png)
 
-# Dungeon with rooms
+### Dungeon with rooms
 Create event:
 ```gml
 dungeon_width = 6;
 dungeon_height = 6;
 
 // Let's create list of rooms for dungeon
-var rooms = dungeon_rooms_list(array(dungeon_room(2, 3, REGULAR), 1));
-            // This code will add one room 2x3
+var list = dungeon_room_list_create();
+dungeon_room_list_add(list, dungeon_room(2, 3, REGULAR), 1);
 
-dungeon = dungeon_create(dungeon_width, dungeon_height, -1);
+dungeon = dungeon_create(dungeon_width, dungeon_height, list);
 ```
 
 Draw event:

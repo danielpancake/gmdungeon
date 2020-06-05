@@ -449,11 +449,11 @@ return list;
 randomize();
 // or somthing like random_set_seed(1234567890);
 
-/// Dungeon properties
+// Dungeon properties
 var width = argument0 + 2;
 var height = argument1 + 2;
 
-/// Create empty dungeon
+// Create empty dungeon
 var dungeon = ds_grid_create(width, height);
 
 ds_grid_clear(dungeon, BEDROCK);
@@ -474,28 +474,30 @@ if (dir % 2 == 0) {
 
 #define dungeon_cell
 /// dungeon_cell(right, up, left, down, type, region)
-/// This is script for initiating dungeon cell
+// This is script for initiating dungeon cell
 
 return array(argument0, argument1, argument2, argument3, argument4, argument5);
 
 #define dungeon_room
 /// dungeon_room(width, height, type)
-/// This is script for initiating dungeon room
+// This is script for initiating dungeon room
 
 return array(argument0, argument1, argument2);
 
-#define dungeon_rooms_list
-/// dungeon_rooms_list(room 1, room 2...)
-/// This is script for initiating dungeon rooms list
+#define dungeon_room_list_add
+/// dungeon_room_list_add(list, room, count)
+// Adding new rooms to the list
 
-var list = ds_list_create();
+var list = argument0;
 
-for (var i = 0; i < argument_count; i++) {
-    var rooms = argument[i];    
-    
-    repeat(rooms[1]) {
-        ds_list_add(list, rooms[0]);
-    }
+repeat (argument2) {
+    ds_list_add(list, argument1);
 }
 
 return list;
+
+#define dungeon_room_list_create
+/// dungeon_room_list_create()
+// This is script for initiating dungeon rooms list
+
+return ds_list_create();
