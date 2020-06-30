@@ -1,21 +1,19 @@
 # gmdungeon
-Dungeon template creating library for GameMaker Studio 1.x
+Dungeon template creating asset for GameMaker: Studio 1.4 and GameMaker Studio 2 
+
+![Dungeon example animated](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example3.gif)
 
 ## Usage
 ### Basic dungeon
 Create event:
 ```gml
-dungeon_width = 4;
-dungeon_height = 6;
-
-// This is ds_grid that contains generated dungeon
-dungeon = dungeon_create(dungeon_width, dungeon_height, -1);
+var setup = dungeon_create(); // Basic dungeon settings
+dungeon = dungeon_generate(setup);
 ```
 
 Draw event:
 ```gml
-// This code will draw the dungeon at (0, 0)
-dungeon_draw(dungeon, 0, 0, dungeon_width, dungeon_height);
+dungeon_draw(dungeon, 0, 0);
 ```
 
 ![Dungeon example](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example.png)
@@ -23,35 +21,38 @@ dungeon_draw(dungeon, 0, 0, dungeon_width, dungeon_height);
 ### Dungeon with rooms
 Create event:
 ```gml
-dungeon_width = 6;
-dungeon_height = 6;
+var setup = dungeon_create(); // Basic dungeon settings
+// Basically it's an array with parameters for dungeon generator
+// Parameters can be changed with dungeon_set_* functions
 
-// Let's create list of rooms for dungeon
-var list = dungeon_room_list_create();
-dungeon_room_list_add(list, dungeon_room(2, 3, REGULAR), 1);
+var list = dungeon_create_rooms_list();
+dungeon_add_room(list, dungeon_room(2, 3, REGULAR), 1);
 
-dungeon = dungeon_create(dungeon_width, dungeon_height, list);
+// And now apply rooms list
+dungeon_set_rooms_list(setup, list);
+
+dungeon = dungeon_generate(setup);
 ```
 
 Draw event:
 ```gml
-// This code will draw the dungeon at (0, 0)
-dungeon_draw(dungeon, 0, 0, dungeon_width, dungeon_height);
+dungeon_draw(dungeon, 0, 0);
 ```
 
 ![Dungeon advanced example](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example2.png)
 
 ## Requirements
-- GameMaker Studio 1.x
+- GameMaker: Studio 1.4 or GameMaker Studio 2
 
 ## Installation
-Drag `gmdungeon.gml` into you open game maker project, add   file `sDungeonCells_strip83.png` as a sprite strip, name is `sDungeonCells` and import `constants.txt` as macros.
+### For GameMaker: Studio 1.4
+Drag all scripts from `src/scripts` folder into your open game maker project, add `sDungeonCells_strip17.png` and `sDungeonRooms_strip13.png` files as a sprite strip, name them `sDungeonCells` and `sDungeonRooms`.
+Delete `dungeon_macros.gml` script and then import `constants.txt` as macros.
 
-Generated dungeon template can be used to build full-sized dungeon (see documentation).
+### For GameMaker Studio 2
+Drag all scripts from `src/scripts` folder into your open game maker project, add `sDungeonCells_strip17.png` and `sDungeonRooms_strip13.png` files as a sprite strip, name them `sDungeonCells` and `sDungeonRooms`.
+
+Generated dungeon's template can be used to build full-sized dungeon (see docs in every script).
 
 ## License
-gmdungeon is available under the MIT License. You may freely adapt and use this library in commercial and non-commercial projects.
-
-## TODO:
-* documentation
-* memory cleanup
+gmdungeon is available under the MIT License. You may freely adapt and use this asset in commercial and non-commercial projects.
