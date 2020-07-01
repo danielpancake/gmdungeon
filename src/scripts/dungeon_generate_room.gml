@@ -18,17 +18,17 @@ for (var i = 0; i < ww; i++) {
 }
 
 for (var i = 0; i < ww; i++) {
-    dungeon_cell_change_direction(dungeon, xx + i, yy, 1, 0);
+	dungeon_cell_change_direction(dungeon, xx + i, yy, 1, 0);
 }
 
 for (var i = 0; i < ww; i++) {
-    dungeon_cell_change_direction(dungeon, xx + i, yy + hh - 1, 3, 0);
+	dungeon_cell_change_direction(dungeon, xx + i, yy + hh - 1, 3, 0);
 }
 
 for (var j = 0; j < hh; j++) {
-    dungeon_cell_change_direction(dungeon, xx, yy + j, 2, 0);
+	dungeon_cell_change_direction(dungeon, xx, yy + j, 2, 0);
 }
 
 for (var j = 0; j < hh; j++) {
-    dungeon_cell_change_direction(dungeon, xx + ww - 1, yy + j, 0, 0);
+	dungeon_cell_change_direction(dungeon, xx + ww - 1, yy + j, 0, 0);
 }

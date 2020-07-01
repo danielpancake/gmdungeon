@@ -4,7 +4,7 @@
 var a, c;
 
 for (c = 0; c < argument_count; c++) {
-    a[c] = argument[c];
+	a[c] = argument[c];
 }
 
 return a;

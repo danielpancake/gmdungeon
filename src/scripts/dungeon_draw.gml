@@ -10,22 +10,21 @@ var width = ds_grid_width(dungeon);
 var height = ds_grid_height(dungeon);
 
 for (var i = 0; i < width; i++) {
-    for (var j = 0; j < height; j++) {
-        var cell = dungeon[# i, j];
-        
-        if (is_cell(cell)) {
+	for (var j = 0; j < height; j++) {
+		var cell = dungeon[# i, j];
+		
+		if (is_cell(cell)) {
 			var celltype = sDungeonCells;
 			
 			if (cell[4] == ROOM) {
 				celltype = sDungeonRooms;
 			}
 			
-            draw_sprite(celltype, 0, xx + i * 8, yy + j * 8);
+			draw_sprite(celltype, 0, xx + i * 8, yy + j * 8);
 			
-			draw_sprite(celltype, 1 + cell[0], xx + i * 8, yy + j * 8);
-			draw_sprite(celltype, 4 + cell[1], xx + i * 8, yy + j * 8);
-			draw_sprite(celltype, 7 + cell[2], xx + i * 8, yy + j * 8);
-			draw_sprite(celltype, 10 + cell[3], xx + i * 8, yy + j * 8);
+			for (var k = 0; k < 4; k++) {
+				draw_sprite(celltype, 1 + 3 * k + cell[k], xx + i * 8, yy + j * 8);
+			}
 			
 			switch (cell[4]) {
 				case ENTRANCE:
@@ -40,8 +39,8 @@ for (var i = 0; i < width; i++) {
 					draw_sprite(sDungeonCells, 16, xx + i * 8, yy + j * 8);
 				break;
 			}
-        } else {
+		} else {
 			draw_sprite(sDungeonCells, 13, xx + i * 8, yy + j * 8);
 		}
-    }
+	}
 }

@@ -10,11 +10,13 @@ var xx = argument1;
 var yy = argument2;
 var region = argument3;
 
-var node = dungeon[# xx, yy];
+var cell = dungeon[# xx, yy];
 
-if (is_cell(node)) {
-    node[5] = region; dungeon[# xx, yy] = node;
-    return true;
+if (is_cell(cell)) {
+	cell[5] = region;
+	dungeon[# xx, yy] = cell;
+	
+	return true;
 } else {
-    return false;
+	return false;
 }
