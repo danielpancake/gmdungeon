@@ -6,9 +6,8 @@
 /// @argument {real} direction Real value representing side of the cell
 /// @argument {real} value Real value representing border state
 /*
-	0 - closed
-	1 - doorway 
-	2 - hallway
+	0 - Closed
+	DOORWAY or HALLWAY
 */
 /// @returns {bool} Whether changing succeded
 var dungeon = argument0;

@@ -13,10 +13,11 @@ var treasure_chance = properties[4];
 var rooms = properties[5];
 
 var dungeon = dungeon_setup(width, height);
+var rooms_props = undefined;
 
 // Try to place rooms from passed list
 if (rooms != -1) {
-	dungeon_init_rooms(dungeon, rooms);
+	rooms_props = dungeon_init_rooms(dungeon, rooms);
 }
 
 // Fill all empty cells
@@ -90,7 +91,7 @@ repeat (deadends_cut_length) {
 					var c = cell[2] != 0;
 					var d = cell[3] != 0;
 					
-					if (!a && !b && (c xor d)) || (!c && !d && (a xor b)) {
+					if (!a && !b && (c ^^ d)) || (!c && !d && (a ^^ b)) {
 						ds_list_add(deadends, array(i, j));
 					}
 				}
@@ -119,4 +120,4 @@ ds_list_destroy(deadends);
 ds_grid_set_grid_region(dungeon, dungeon, 1, 1, width, height, 0, 0);
 ds_grid_resize(dungeon, width, height);
 
-return dungeon;
+return array(dungeon, rooms_props);

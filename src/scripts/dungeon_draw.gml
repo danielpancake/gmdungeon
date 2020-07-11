@@ -2,7 +2,8 @@
 /// @argument {ds_grid} index Index of dungeon generated with dungeon_generate()
 /// @argument {real} x The x coordinate to draw the dungeon
 /// @argument {real} y The y coordinate to draw the dungeon
-var dungeon = argument0;
+var dungeon = argument0[0];
+var rooms = argument0[1];
 var xx = argument1;
 var yy = argument2;
 
@@ -16,7 +17,7 @@ for (var i = 0; i < width; i++) {
 		if (is_cell(cell)) {
 			var celltype = sDungeonCells;
 			
-			if (cell[4] == ROOM) {
+			if (cell[4] >= EMPTY_ROOM) {
 				celltype = sDungeonRooms;
 			}
 			
@@ -42,5 +43,19 @@ for (var i = 0; i < width; i++) {
 		} else {
 			draw_sprite(sDungeonCells, 13, xx + i * 8, yy + j * 8);
 		}
+	}
+}
+
+if (rooms != undefined) {
+	for (var i = 0; i < ds_list_size(rooms); i++) {
+		var rm = rooms[| i];
+		var index;
+		
+		switch (rm[4]) {
+			case BOSS_ROOM: index = 17; break;
+			case SHOP_ROOM: index = 18; break;
+		}
+		
+		draw_sprite(sDungeonCells, index, (rm[0] + rm[2] / 2 - 1) * 8 - 4, (rm[1] + rm[3] / 2 - 1) * 8 - 4);
 	}
 }

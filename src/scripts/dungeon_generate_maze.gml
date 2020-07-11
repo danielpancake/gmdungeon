@@ -25,13 +25,13 @@ while (true) {
 		dungeon[# xx + xdir, yy + ydir] = dungeon_cell(0, 0, 0, 0, REGULAR, -1);
 		
 		if (with_a_chance(hall_gen)) {
-			dungeon_cell_change_direction(dungeon, xx, yy, dir, 2);
+			dungeon_cell_change_direction(dungeon, xx, yy, dir, HALLWAY);
 			dungeon_cell_change_type(dungeon, xx, yy, HALL);
-			dungeon_cell_change_direction(dungeon, xx + xdir, yy + ydir, inverse_direction(dir), 2);
+			dungeon_cell_change_direction(dungeon, xx + xdir, yy + ydir, inverse_direction(dir), HALLWAY);
 			dungeon_cell_change_type(dungeon, xx + xdir, yy + ydir, HALL);
 		} else {
-			dungeon_cell_change_direction(dungeon, xx, yy, dir, 1);
-			dungeon_cell_change_direction(dungeon, xx + xdir, yy + ydir, inverse_direction(dir), 1);
+			dungeon_cell_change_direction(dungeon, xx, yy, dir, DOORWAY);
+			dungeon_cell_change_direction(dungeon, xx + xdir, yy + ydir, inverse_direction(dir), DOORWAY);
 		}
 		
 	xx += xdir; yy += ydir;

@@ -13,6 +13,7 @@ for (var i = 0; i < ds_list_size(rooms); i++) {
 	
 	var width = rm[0];
 	var height = rm[1];
+	var type = rm[2];
 	
 	repeat(1000) {
 		var can_be_placed = true;
@@ -31,8 +32,8 @@ for (var i = 0; i < ds_list_size(rooms); i++) {
 		}
 		
 		if (can_be_placed) {
-			dungeon_generate_room(dungeon, xx, yy, width, height);
-			ds_list_add(list, array(xx, yy, width, height));
+			dungeon_generate_room(dungeon, xx, yy, width, height, type);
+			ds_list_add(list, array(xx, yy, width, height, type));
 			
 			break;
 		}
