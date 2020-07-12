@@ -49,13 +49,10 @@ for (var i = 0; i < width; i++) {
 if (rooms != undefined) {
 	for (var i = 0; i < ds_list_size(rooms); i++) {
 		var rm = rooms[| i];
-		var index;
 		
-		switch (rm[4]) {
-			case BOSS_ROOM: index = 17; break;
-			case SHOP_ROOM: index = 18; break;
+		if (rm[4] > EMPTY_ROOM) {
+			draw_sprite(sDungeonCells, rm[4] + 10, (rm[0] + rm[2] / 2 - 1) * 8 - 4,
+										(rm[1] + rm[3] / 2 - 1) * 8 - 4);
 		}
-		
-		draw_sprite(sDungeonCells, index, (rm[0] + rm[2] / 2 - 1) * 8 - 4, (rm[1] + rm[3] / 2 - 1) * 8 - 4);
 	}
 }
