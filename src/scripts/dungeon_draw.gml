@@ -51,8 +51,8 @@ if (rooms != undefined) {
 		var rm = rooms[| i];
 		
 		if (rm[4] > EMPTY_ROOM) {
-			draw_sprite(sDungeonCells, rm[4] + 10, (rm[0] + rm[2] / 2 - 1) * 8 - 4,
-										(rm[1] + rm[3] / 2 - 1) * 8 - 4);
+			draw_sprite(sDungeonCells, rm[4] + 10, xx + (rm[0] + rm[2] / 2 - 1) * 8 - 4,
+													yy + (rm[1] + rm[3] / 2 - 1) * 8 - 4);
 		}
 	}
 }
