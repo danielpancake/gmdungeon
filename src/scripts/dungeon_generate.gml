@@ -9,8 +9,9 @@ var width = properties[0];
 var height = properties[1];
 var deadends_cut_length = properties[2];
 var hallway_chance = properties[3];
-var treasure_chance = properties[4];
-var rooms = properties[5];
+var treasure_min_rooms = properties[4];
+var treasure_max_rooms = properties[5];
+var rooms = properties[6];
 
 var dungeon = dungeon_setup(width, height);
 var rooms_props = undefined;
@@ -93,28 +94,35 @@ repeat (deadends_cut_length) {
 					
 					if (!a && !b && (c ^^ d)) || (!c && !d && (a ^^ b)) {
 						ds_list_add(deadends, array(i, j));
+						dungeon_cell_remove(dungeon, i, j);
 					}
 				}
 			}
 		}
 	}
-	
-	if (ds_list_empty(deadends)) break;
-	
-	// and place tresure rooms
-	for (var i = 0; i < ds_list_size(deadends); i++) {
-		var cell = deadends[| i];
-		var xx = cell[0];
-		var yy = cell[1];
-		
-		dungeon_cell_remove(dungeon, xx, yy);
-		
-		if (with_a_chance(treasure_chance)) {
-			dungeon[# xx, yy] = dungeon_cell(0, 0, 0, 0, TREASURE, -1);
-		}
-	}
-	ds_list_clear(deadends);
 }
+
+ds_list_shuffle(deadends);
+
+// and then place tresure rooms
+var iter = irandom_range(treasure_min_rooms, treasure_max_rooms);
+
+for (var i = 0; i < clamp(iter, 0, ds_list_size(deadends)); i++) {
+	var cell = deadends[| i];
+	var xx = cell[0];
+	var yy = cell[1];
+	
+	if (get_cell_type(dungeon[# xx + 1, yy]) != TREASURE &&
+		get_cell_type(dungeon[# xx, yy - 1]) != TREASURE &&
+		get_cell_type(dungeon[# xx - 1, yy]) != TREASURE &&
+		get_cell_type(dungeon[# xx, yy + 1]) != TREASURE) {
+		
+		dungeon[# xx, yy] = dungeon_cell(0, 0, 0, 0, TREASURE, -1);
+	} else {
+		iter++;	
+	}
+}
+ds_list_clear(deadends);
 ds_list_destroy(deadends);
 
 ds_grid_set_grid_region(dungeon, dungeon, 1, 1, width, height, 0, 0);

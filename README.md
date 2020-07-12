@@ -79,8 +79,8 @@ dungeon_add_room(list, dungeon_room(3, 3, BOSS_ROOM), 1);
 dungeon_add_room(list, dungeon_room(3, 2, SHOP_ROOM), 1);
 
 // This function will tell generator to cut 3 cells from every deadend
-// empty cells will be filled will treasure room with the chance of 50% by default
-// which is actually very high. You can change that with dungeon_set_treasure_room_chance function.
+// empty cells will be filled with from 1 up to 3 treasure rooms by default.
+// To change this range use dungeon_set_tresure_rooms function.
 dungeon_set_deadend_cut_length(setup, 3);
 
 // Everything else is the same
@@ -113,6 +113,4 @@ Generated dungeon-template can be used to build full-sized dungeon (see docs in 
 gmdungeon is available under the MIT License. You may freely adapt and use this asset in commercial and non-commercial projects.
 
 ## TODO and ideas:
-- Replace `dungeon_set_treasure_room_chance` with min/max function and update `dungeon_generate`
-- Make treasure rooms spawn far from each other
 - Insert constant pregenerated areas in dungeon
