@@ -23,7 +23,7 @@ for (var i = 0; i < ds_list_size(rooms); i++) {
 		
 		for (var _x = xx; _x < xx + width; _x++) {
 			for (var _y = yy; _y < yy + height; _y++) {
-				if (dungeon[# _x, _y] != BEDROCK && dungeon[# _x, _y] != VOID) {
+				if (dungeon[# _x, _y] != VOID) {
 					can_be_placed = false; break;
 				}
 			}
