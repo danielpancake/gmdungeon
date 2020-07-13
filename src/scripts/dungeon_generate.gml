@@ -1,24 +1,30 @@
-/// @function dungeon_generate(dungeon)
+/// @function dungeon_generate(setup)
 /// @description Generates dungeon template
 /// @argument {array} dungeon Dungeon settings created with dungeon_create()
 /// 						and edited with dungeon_set_* functions.
 /// @returns {ds_grid} Generated dungeon template
-var properties = argument0;
+var setup = argument0;
 
-var width = properties[0];
-var height = properties[1];
-var deadends_cut_length = properties[2];
-var hallway_chance = properties[3];
-var treasure_min_rooms = properties[4];
-var treasure_max_rooms = properties[5];
-var rooms = properties[6];
+var width = setup[0];
+var height = setup[1];
+var deadends_cut_length = setup[2];
+var hallway_chance = setup[3];
+var treasure_min_rooms = setup[4];
+var treasure_max_rooms = setup[5];
+var rooms = setup[6];
+var mask = setup[7];
 
 var dungeon = dungeon_setup(width, height);
-var rooms_props = undefined;
+var rooms_setup = undefined;
+
+// Apply the mask
+if (mask != -1) {
+	dungeon_generate_mask(dungeon, mask[0], mask[1]);
+}
 
 // Try to place rooms from passed list
 if (rooms != -1) {
-	rooms_props = dungeon_init_rooms(dungeon, rooms);
+	rooms_setup = dungeon_init_rooms(dungeon, rooms);
 }
 
 // Fill all empty cells
@@ -37,8 +43,10 @@ for (var i = 1; i < width + 1; i++) {
 	for (var j = 1; j < height + 1; j++) {
 		var cell = dungeon[# i, j];
 		
-		if (cell[5] == -1) {
-			dungeon_floodfill(dungeon, i, j, region++);
+		if (is_cell(cell)) {
+			if (cell[5] == -1) {
+				dungeon_floodfill(dungeon, i, j, region++);
+			}
 		}
 	}
 }
@@ -50,16 +58,18 @@ for (var n = 0; n < region; n++) {
 		for (var j = 1; j < height + 1; j++) {
 			var cell = dungeon[# i, j];
 			
-			if (cell[5] == n) {
-				for (var dir = 0; dir < 4; dir++) {
-					var xdir = lengthdir_x(1, dir * 90);
-					var ydir = lengthdir_y(1, dir * 90);
+			if (is_cell(cell)) {
+				if (cell[5] == n) {
+					for (var dir = 0; dir < 4; dir++) {
+						var xdir = lengthdir_x(1, dir * 90);
+						var ydir = lengthdir_y(1, dir * 90);
 					
-					var nextcell = dungeon[# i + xdir, j + ydir];
+						var nextcell = dungeon[# i + xdir, j + ydir];
 					
-					if (is_cell(nextcell)) {
-						if (nextcell[5] != n) {
-							ds_list_add(doors, array(i, j, dir));
+						if (is_cell(nextcell)) {
+							if (nextcell[5] != n) {
+								ds_list_add(doors, array(i, j, dir));
+							}
 						}
 					}
 				}
@@ -128,4 +138,4 @@ ds_list_destroy(deadends);
 ds_grid_set_grid_region(dungeon, dungeon, 1, 1, width, height, 0, 0);
 ds_grid_resize(dungeon, width, height);
 
-return array(dungeon, rooms_props);
+return array(dungeon, rooms_setup);

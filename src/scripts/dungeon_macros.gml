@@ -22,4 +22,5 @@
 #macro REGULAR 1
 
 #macro VOID 0
+#macro BORDER -1
 #macro BEDROCK -999

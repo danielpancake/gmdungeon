@@ -11,4 +11,5 @@
 /// [4] min number of trasure rooms
 /// [5] max number of trasure rooms
 /// [6] rooms list
-return array(8, 8, 0, 50, 1, 3, -1);
+/// [7] mask (array: [0] - sprite, [1] - index)
+return array(8, 8, 0, 50, 1, 3, -1, -1);
