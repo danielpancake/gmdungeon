@@ -84,8 +84,8 @@ for (var n = 0; n < region; n++) {
 }
 
 // Place entrance and exit
-var entrance = dungeon_cell_place_randomly(dungeon, width, height, ENTRANCE, 0);
-dungeon_cell_place_randomly(dungeon, width, height, EXIT, entrance);
+var entrance = dungeon_cell_change_type_randomly(dungeon, ENTRANCE, -1, false, 0);
+dungeon_cell_change_type_randomly(dungeon, EXIT, entrance, true, 1);
 
 // Cut deadends
 var deadends = ds_list_create();
