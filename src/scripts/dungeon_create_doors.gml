@@ -8,7 +8,7 @@ var doors = argument1;
 var size = ds_list_size(doors);
 ds_list_shuffle(doors);
 
-for (var j = 0; j < clamp(irandom(3) + 1, 1, size - 1); j++) {
+for (var j = 0; j < clamp(irandom(3) + 1, 1, size); j++) {
 	var door = doors[| j];
 	
 	var _x  = door[0];
