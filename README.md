@@ -1,6 +1,6 @@
 # gmdungeon
-Dungeon-template creating asset for GameMaker: Studio 1.4 and GameMaker Studio 2 
-
+Dungeon-template creating asset for GameMaker: Studio 1.4 and GameMaker Studio 2 (pre 2.3)
+### ```<!> This version is no longer supported by newest versions of GameMaker Studio due to syntax update <!>```
 ![Dungeon example animated](https://github.com/DanielPancake/gmdungeon/raw/master/assets/example3.gif)
 
 ## Usage
@@ -129,20 +129,17 @@ dungeon_draw(dungeon, 0, 0);
 Thank you for checking out this asset!
 
 ## Requirements
-- GameMaker: Studio 1.4 or GameMaker Studio 2
+- GameMaker: Studio 1.4 or GameMaker Studio 2 (pre 2.3)
 
 ## Installation
 ### For GameMaker: Studio 1.4
 Drag all scripts from `src/scripts` folder into your open game maker project, add `sDungeonCells_strip19.png` and `sDungeonRooms_strip13.png` files as a sprite strips, name them `sDungeonCells` and `sDungeonRooms`.
 Delete `dungeon_macros.gml` script and then import `constants.txt` as macros.
 
-### For GameMaker Studio 2
+### For GameMaker Studio 2 (below 2.3)
 Drag all scripts from `src/scripts` folder into your open game maker project, add `sDungeonCells_strip19.png` and `sDungeonRooms_strip13.png` files as a sprite strips, name them `sDungeonCells` and `sDungeonRooms`.
 
 Generated dungeon-template can be used to build full-sized dungeon (see docs in every script).
 
 ## License
 gmdungeon is available under the MIT License. You may freely adapt and use this asset in commercial and non-commercial projects.
-
-## TODO and ideas:
-- Insert constant pregenerated areas in dungeon
